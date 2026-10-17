@@ -1,0 +1,15 @@
+<h1 class="font-display text-3xl font-extrabold">Dashboard</h1>
+
+<div class="mt-8 grid gap-5 sm:grid-cols-2">
+  <a routerLink="/admin/projects" class="rounded-xl border border-line bg-surface p-6 transition-colors hover:border-accent">
+    <p class="text-sm text-muted">Projects</p>
+    <p class="font-display mt-2 text-4xl font-extrabold">{{ store.projects().length }}</p>
+    <p class="mt-3 text-sm text-accent">Manage projects</p>
+  </a>
+
+  <a routerLink="/admin/resume" class="rounded-xl border border-line bg-surface p-6 transition-colors hover:border-accent">
+    <p class="text-sm text-muted">Current CV</p>
+    <p class="font-display mt-2 text-2xl font-extrabold">{{ resume.url() ? 'Uploaded' : 'Not uploaded' }}</p>
+    <p class="mt-3 text-sm text-accent">Manage CV</p>
+  </a>
+</div>

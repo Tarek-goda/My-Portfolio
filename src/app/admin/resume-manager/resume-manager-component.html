@@ -1,0 +1,33 @@
+<h1 class="font-display text-3xl font-extrabold">CV</h1>
+
+<div class="mt-8 max-w-xl space-y-6 rounded-xl border border-line bg-surface p-6">
+  <div>
+    <p class="text-sm text-muted">Current file</p>
+    @if (resume.url(); as url) {
+      <a class="mt-1 inline-block font-medium text-accent hover:underline" [href]="url" target="_blank" rel="noopener noreferrer">
+        Open current CV
+      </a>
+    } @else {
+      <p class="mt-1 font-medium">No CV uploaded.</p>
+    }
+  </div>
+
+  <div>
+    <label class="label" for="cv">Upload a new PDF (replaces the current one)</label>
+    <input id="cv" class="field" type="file" accept="application/pdf" [disabled]="busy()" (change)="onFile($event)" />
+  </div>
+
+  @if (busy()) {
+    <app-spinner label="Working" />
+  }
+  @if (message(); as text) {
+    <p class="text-sm text-accent" role="status">{{ text }}</p>
+  }
+  @if (error(); as text) {
+    <p class="text-sm text-red-500" role="alert">{{ text }}</p>
+  }
+
+  @if (resume.url()) {
+    <button type="button" class="btn btn-danger" [disabled]="busy()" (click)="remove()">Delete CV</button>
+  }
+</div>

@@ -1,0 +1,111 @@
+<!-- Hero -->
+<section
+  class="mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl flex-col justify-center px-5 py-16"
+>
+  <p class="rise text-sm font-medium text-muted">Front-End Developer · Angular · Egypt</p>
+
+  <h1 class="sr-only">Tarek Goda</h1>
+  <app-hero-draw-name text="Tarek Goda" class="mt-4 block w-full max-w-4xl" />
+  <app-hero-draw-name
+    text="Make art, not war"
+    [fontSize]="54"
+    [viewBoxHeight]="80"
+    [strokeWidth]="1.6"
+    [delayMs]="1400"
+    class="block w-full max-w-4xl"
+  />
+  <p class="rise mt-6 max-w-xl text-lg leading-relaxed text-muted" style="animation-delay: 0.4s">
+    I build Angular applications and connect them to real data, from a QR attendance system on
+    Google Apps Script to full CRUD apps with authentication.
+  </p>
+
+  <div class="rise mt-8 flex flex-wrap gap-3" style="animation-delay: 0.55s">
+    <a class="btn btn-primary" routerLink="/projects">View projects</a>
+    @if (resume.url(); as url) {
+      <a class="btn btn-ghost" [href]="url" target="_blank" rel="noopener noreferrer"
+        >Download CV</a
+      >
+    }
+  </div>
+</section>
+
+<!-- Selected work -->
+<section class="mx-auto max-w-6xl px-5 py-16" aria-labelledby="work-title">
+  <div class="flex items-end justify-between gap-4">
+    <h2 id="work-title" class="font-display text-3xl font-extrabold sm:text-4xl">Selected work</h2>
+    <a routerLink="/projects" class="text-sm font-medium text-accent hover:underline"
+      >All projects</a
+    >
+  </div>
+
+  <div class="mt-8 border-t border-line">
+    @if (store.loading() && store.projects().length === 0) {
+      <div class="flex justify-center py-14"><app-spinner label="Loading projects" /></div>
+    } @else if (store.error()) {
+      <p class="py-10 text-red-500" role="alert">{{ store.error() }}</p>
+    } @else {
+      @for (project of featured(); track project.id) {
+        <app-project-card [project]="project" />
+      } @empty {
+        <p class="py-10 text-muted">Projects are coming soon.</p>
+      }
+    }
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="mx-auto max-w-6xl px-5 py-16" aria-labelledby="exp-title">
+  <h2 id="exp-title" class="font-display text-3xl font-extrabold sm:text-4xl">Experience</h2>
+
+  <ol class="mt-10 space-y-10 border-l border-line pl-6 sm:pl-8">
+    @for (item of experience; track item.role) {
+      <li class="relative">
+        <span
+          class="absolute -left-[1.9rem] top-2 size-2.5 rounded-full bg-accent sm:-left-[2.4rem]"
+          aria-hidden="true"
+        ></span>
+        <h3 class="font-display text-xl font-bold">{{ item.role }}</h3>
+        <p class="mt-1 text-sm text-muted">
+          {{ item.org }}
+          @if (item.period) {
+            · {{ item.period }}
+          }
+        </p>
+        <ul class="mt-3 max-w-2xl list-disc space-y-1.5 pl-5 text-muted marker:text-accent">
+          @for (point of item.points; track point) {
+            <li>{{ point }}</li>
+          }
+        </ul>
+      </li>
+    }
+  </ol>
+</section>
+
+<!-- Skills -->
+<section class="mx-auto max-w-6xl px-5 py-16" aria-labelledby="skills-title">
+  <h2 id="skills-title" class="font-display text-3xl font-extrabold sm:text-4xl">Skills</h2>
+
+  <div class="mt-10 grid gap-8 md:grid-cols-3">
+    @for (group of skills; track group.group) {
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-accent">{{ group.group }}</h3>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          @for (item of group.items; track item) {
+            <li class="chip !text-fg">{{ item }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="mx-auto max-w-6xl px-5 py-20">
+  <div class="rounded-2xl border border-line bg-surface p-8 sm:p-12">
+    <h2 class="font-display text-3xl font-extrabold sm:text-4xl">Have a project in mind?</h2>
+    <p class="mt-3 max-w-lg text-muted">
+      I'm open to front-end work with Angular. Send me a message and I'll reply soon.
+    </p>
+    <a class="btn btn-primary mt-6" routerLink="/contact">Get in touch</a>
+  </div>
+</section>

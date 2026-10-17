@@ -1,0 +1,17 @@
+<footer class="border-t border-line">
+  <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+    <p>© {{ year }} Tarek Goda. Built with Angular, Tailwind CSS and Supabase.</p>
+
+    <div class="flex items-center gap-5">
+      <a class="transition-transform hover:-translate-y-0.5" [href]="gmailUrl" target="_blank" rel="noopener noreferrer" aria-label="Email me on Gmail">
+        <app-icon name="gmail" [size]="22" />
+      </a>
+      <a class="transition-colors hover:text-accent" [href]="linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+        <app-icon name="linkedin" [size]="22" />
+      </a>
+      <a class="transition-colors hover:text-accent" [href]="github" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+        <app-icon name="github" [size]="22" />
+      </a>
+    </div>
+  </div>
+</footer>

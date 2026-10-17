@@ -1,0 +1,32 @@
+:host { display: inline-flex; }
+
+.logo {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+}
+
+:host(:hover) .logo,
+:host-context(a:hover) .logo {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.frame { stroke: var(--accent-2); }
+.letter { stroke: var(--accent); }
+
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: draw-logo 0.8s cubic-bezier(0.65, 0, 0.35, 1) var(--d) forwards;
+}
+
+@keyframes draw-logo {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  8% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draw { animation: none; stroke-dashoffset: 0; opacity: 1; }
+  .logo { transition: none; }
+}

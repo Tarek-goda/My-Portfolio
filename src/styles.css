@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+}
+
+:root {
+  color-scheme: light;
+  --bg: #eceee8;
+  --surface: #f6f7f3;
+  --fg: #16263c;
+  --muted: #566f68;
+  --line: rgb(22 38 60 / 0.14);
+  --accent: #0e7c6b;
+  --accent-2: #8a6508;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0e1a2b;
+  --surface: #14233a;
+  --fg: #eceee8;
+  --muted: #9fb3ac;
+  --line: rgb(236 238 232 / 0.14);
+  --accent: #6fd3bf;
+  --accent-2: #e6c26a;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply bg-accent text-bg hover:-translate-y-0.5; }
+  .btn-ghost { @apply border border-line text-fg hover:border-accent hover:text-accent; }
+  .btn-danger { @apply border border-red-500/40 text-red-500 hover:bg-red-500/10; }
+  .field { @apply w-full rounded-lg border border-line bg-surface px-3.5 py-2.5 text-sm text-fg placeholder:text-muted focus:border-accent focus:outline-none; }
+  .label { @apply mb-1.5 block text-sm font-medium; }
+  .chip { @apply rounded-full border border-line px-3 py-1 text-xs text-muted; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise { animation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; }
+}

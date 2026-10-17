@@ -1,0 +1,49 @@
+<section class="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-2">
+  <div>
+    <h1 class="rise font-display text-4xl font-extrabold sm:text-5xl">Contact</h1>
+    <p class="rise mt-3 max-w-md text-muted" style="animation-delay: 0.1s">
+      The quickest way to reach me is by email or LinkedIn.
+    </p>
+
+    <ul class="mt-8 space-y-4">
+      <li>
+        <a class="inline-flex items-center gap-3 font-medium transition-colors hover:text-accent" [href]="gmailUrl" target="_blank" rel="noopener noreferrer">
+          <app-icon name="gmail" [size]="24" />
+          <span>{{ email }}</span>
+        </a>
+      </li>
+      <li>
+        <a class="inline-flex items-center gap-3 font-medium transition-colors hover:text-accent" [href]="linkedin" target="_blank" rel="noopener noreferrer">
+          <app-icon name="linkedin" [size]="24" />
+          <span>LinkedIn</span>
+        </a>
+      </li>
+      <li>
+        <a class="inline-flex items-center gap-3 font-medium transition-colors hover:text-accent" [href]="github" target="_blank" rel="noopener noreferrer">
+          <app-icon name="github" [size]="24" />
+          <span>GitHub</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="send()" class="space-y-5" novalidate>
+    <div>
+      <label class="label" for="name">Your name</label>
+      <input id="name" class="field" type="text" formControlName="name" autocomplete="name" />
+      @if (form.controls.name.touched && form.controls.name.invalid) {
+        <p class="mt-1 text-sm text-red-500">Please enter your name.</p>
+      }
+    </div>
+
+    <div>
+      <label class="label" for="message">Message</label>
+      <textarea id="message" class="field min-h-36" formControlName="message"></textarea>
+      @if (form.controls.message.touched && form.controls.message.invalid) {
+        <p class="mt-1 text-sm text-red-500">Write at least 10 characters.</p>
+      }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Open in Gmail</button>
+  </form>
+</section>

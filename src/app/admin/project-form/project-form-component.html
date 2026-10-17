@@ -1,0 +1,64 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5" novalidate>
+  <div>
+    <label class="label" for="title">Title</label>
+    <input id="title" class="field" type="text" formControlName="title" />
+    @if (form.controls.title.touched && form.controls.title.invalid) {
+      <p class="mt-1 text-sm text-red-500">Title is required.</p>
+    }
+  </div>
+
+  <div>
+    <label class="label" for="description">Description</label>
+    <textarea id="description" class="field min-h-28" formControlName="description"></textarea>
+    @if (form.controls.description.touched && form.controls.description.invalid) {
+      <p class="mt-1 text-sm text-red-500">Description is required.</p>
+    }
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label class="label" for="live_url">Live demo URL</label>
+      <input id="live_url" class="field" type="url" formControlName="live_url" placeholder="https://" />
+      @if (form.controls.live_url.invalid) { <p class="mt-1 text-sm text-red-500">Must start with http:// or https://</p> }
+    </div>
+    <div>
+      <label class="label" for="repo_url">Repository URL</label>
+      <input id="repo_url" class="field" type="url" formControlName="repo_url" placeholder="https://github.com/..." />
+      @if (form.controls.repo_url.invalid) { <p class="mt-1 text-sm text-red-500">Must start with http:// or https://</p> }
+    </div>
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label class="label" for="poster_file">Poster image (upload)</label>
+      <input id="poster_file" class="field" type="file" accept="image/*" (change)="onFile($event)" />
+    </div>
+    <div>
+      <label class="label" for="poster_url">or poster URL</label>
+      <input id="poster_url" class="field" type="url" formControlName="poster_url" placeholder="https://" />
+    </div>
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label class="label" for="tags">Tags (comma separated)</label>
+      <input id="tags" class="field" type="text" formControlName="tags" placeholder="Angular, Tailwind CSS" />
+    </div>
+    <div>
+      <label class="label" for="sort_order">Order (smaller shows first)</label>
+      <input id="sort_order" class="field" type="number" formControlName="sort_order" />
+    </div>
+  </div>
+
+  @if (error(); as message) {
+    <p class="text-sm text-red-500" role="alert">{{ message }}</p>
+  }
+
+  <div class="flex gap-3">
+    <button type="submit" class="btn btn-primary" [disabled]="saving()">
+      @if (saving()) { <app-spinner size="sm" label="Saving" /> }
+      Save
+    </button>
+    <button type="button" class="btn btn-ghost" (click)="cancelled.emit()">Cancel</button>
+  </div>
+</form>

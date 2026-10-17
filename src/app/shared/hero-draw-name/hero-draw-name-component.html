@@ -1,0 +1,31 @@
+<svg
+  #svg
+  class="h-auto w-full"
+  [attr.viewBox]="'0 0 ' + viewBoxWidth() + ' ' + viewBoxHeight()"
+  role="img"
+  [attr.aria-label]="text()"
+  style="visibility: hidden"
+>
+  <defs>
+    <linearGradient [attr.id]="gradientId" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color: var(--accent)" />
+      <stop offset="100%" style="stop-color: var(--accent-2)" />
+    </linearGradient>
+  </defs>
+  <text
+    #label
+    class="font-display font-extrabold"
+    x="4"
+    y="50%"
+    text-anchor="start"
+    dominant-baseline="middle"
+    fill="none"
+    [attr.stroke]="'url(#' + gradientId + ')'"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    [attr.stroke-width]="strokeWidth()"
+    [attr.font-size]="fontSize()"
+  >
+    {{ text() }}
+  </text>
+</svg>

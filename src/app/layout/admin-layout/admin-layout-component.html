@@ -1,0 +1,31 @@
+<div class="min-h-screen md:grid md:grid-cols-[240px_1fr]">
+  <aside class="flex flex-col border-b border-line bg-surface md:border-b-0 md:border-r">
+    <a routerLink="/admin" class="font-display px-5 pt-5 text-lg font-extrabold">Admin</a>
+
+    <nav class="flex gap-1 overflow-x-auto px-3 py-3 md:flex-col" aria-label="Admin">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="!bg-bg !text-accent"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+          class="whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-fg"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="mt-auto hidden gap-2 p-3 md:flex md:flex-col">
+      <a routerLink="/" class="btn btn-ghost">View site</a>
+      <button type="button" class="btn btn-danger" (click)="signOut()">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="min-w-0 p-5 sm:p-8">
+    <router-outlet />
+    <div class="mt-10 flex gap-2 md:hidden">
+      <a routerLink="/" class="btn btn-ghost">View site</a>
+      <button type="button" class="btn btn-danger" (click)="signOut()">Sign out</button>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,68 @@
+<article class="border-b border-line">
+  <button
+    type="button"
+    class="group flex w-full items-center justify-between gap-4 py-5 text-left"
+    [attr.aria-expanded]="open()"
+    [attr.aria-controls]="'panel-' + project().id"
+    (click)="open.update((v) => !v)"
+  >
+    <span class="font-display text-xl font-bold transition-colors group-hover:text-accent sm:text-2xl">
+      {{ project().title }}
+    </span>
+    <span class="flex items-center gap-4">
+      <span class="hidden flex-wrap justify-end gap-2 sm:flex">
+        @for (tag of project().tags; track tag) {
+          <span class="chip">{{ tag }}</span>
+        }
+      </span>
+      <svg
+        class="size-5 shrink-0 text-muted transition-transform duration-300"
+        [class.rotate-180]="open()"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    </span>
+  </button>
+
+  <div
+    [id]="'panel-' + project().id"
+    class="grid transition-[grid-template-rows] duration-300 ease-out"
+    [class]="open() ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
+    [attr.inert]="open() ? null : ''"
+  >
+    <div class="overflow-hidden">
+      <div class="grid gap-6 pb-8 md:grid-cols-2">
+        @if (project().poster_url; as poster) {
+          <img
+            [src]="poster"
+            [alt]="'Poster of ' + project().title"
+            loading="lazy"
+            class="aspect-video w-full rounded-lg border border-line object-cover"
+          />
+        }
+        <div class="flex flex-col justify-between gap-5">
+          <p class="leading-relaxed text-muted">{{ project().description }}</p>
+          <div class="flex flex-wrap gap-3">
+            @if (project().live_url; as live) {
+              <a class="btn btn-primary" [href]="live" target="_blank" rel="noopener noreferrer">
+                Live demo
+              </a>
+            }
+            @if (project().repo_url; as repo) {
+              <a class="btn btn-ghost" [href]="repo" target="_blank" rel="noopener noreferrer">
+                Source code
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

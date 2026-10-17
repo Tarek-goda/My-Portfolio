@@ -1,0 +1,20 @@
+<section class="mx-auto max-w-6xl px-5 py-16">
+  <h1 class="rise font-display text-4xl font-extrabold sm:text-5xl">Projects</h1>
+  <p class="rise mt-3 max-w-xl text-muted" style="animation-delay: 0.1s">
+    Open a project to see its poster, description and links.
+  </p>
+
+  <div class="mt-10 border-t border-line">
+    @if (store.loading() && store.projects().length === 0) {
+      <div class="flex justify-center py-16"><app-spinner label="Loading projects" /></div>
+    } @else if (store.error()) {
+      <p class="py-10 text-red-500" role="alert">{{ store.error() }}</p>
+    } @else {
+      @for (project of store.projects(); track project.id) {
+        <app-project-card [project]="project" />
+      } @empty {
+        <p class="py-10 text-muted">No projects yet.</p>
+      }
+    }
+  </div>
+</section>

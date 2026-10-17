@@ -1,0 +1,25 @@
+:host { display: inline-flex; }
+
+.spinner {
+  --size: 2.25rem;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  border: 3px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  border-top-color: var(--accent);
+  border-right-color: var(--accent-2);
+  animation: spin 0.8s linear infinite;
+}
+
+.spinner[data-size='sm'] { --size: 1.1rem; border-width: 2px; }
+.spinner[data-size='lg'] { --size: 3.5rem; border-width: 4px; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* حركة أبطأ بدل إلغائها، لأن الـ spinner مؤشر حالة */
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2.4s; }
+}
