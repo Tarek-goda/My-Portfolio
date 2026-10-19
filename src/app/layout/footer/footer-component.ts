@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { EmailService } from '../../core/services/email-service';
 import { IconComponent } from '../../shared/icon/icon-component';
 
 @Component({
@@ -8,9 +9,15 @@ import { IconComponent } from '../../shared/icon/icon-component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
+  private readonly mail = inject(EmailService);
+
   protected readonly year = new Date().getFullYear();
-  protected readonly email = 'tarrekgoda@gmail.com';
-  protected readonly gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${this.email}`;
-  protected readonly linkedin = 'https://www.linkedin.com/in/tarek-goda';
+  protected readonly gmailUrl = this.mail.webUrl();
+  protected readonly linkedin = 'https://www.linkedin.com/in/tarekgoda22/';
   protected readonly github = 'https://github.com/Tarek-goda';
+
+  protected openEmail(event: Event): void {
+    event.preventDefault();
+    this.mail.open();
+  }
 }

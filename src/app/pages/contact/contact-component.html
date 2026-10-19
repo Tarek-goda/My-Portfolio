@@ -7,7 +7,7 @@
 
     <ul class="mt-8 space-y-4">
       <li>
-        <a class="inline-flex items-center gap-3 font-medium transition-colors hover:text-accent" [href]="gmailUrl" target="_blank" rel="noopener noreferrer">
+        <a class="inline-flex items-center gap-3 font-medium transition-colors hover:text-accent" [href]="gmailUrl" (click)="openEmail($event)" target="_blank" rel="noopener noreferrer">
           <app-icon name="gmail" [size]="24" />
           <span>{{ email }}</span>
         </a>
