@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5" novalidate>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label class="label" for="title">Title</label>
+      <input id="title" class="field" type="text" formControlName="title" />
+      @if (form.controls.title.touched && form.controls.title.invalid) {
+        <p class="mt-1 text-sm text-red-500">Title is required.</p>
+      }
+    </div>
+    <div>
+      <label class="label" for="issuer">Issued by</label>
+      <input id="issuer" class="field" type="text" formControlName="issuer" placeholder="IBM SkillsBuild" />
+      @if (form.controls.issuer.touched && form.controls.issuer.invalid) {
+        <p class="mt-1 text-sm text-red-500">Issuer is required.</p>
+      }
+    </div>
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label class="label" for="issued_on">Date issued</label>
+      <input id="issued_on" class="field" type="date" formControlName="issued_on" />
+    </div>
+    <div>
+      <label class="label" for="credential_url">Credential URL</label>
+      <input id="credential_url" class="field" type="url" formControlName="credential_url" placeholder="https://" />
+      @if (form.controls.credential_url.invalid) { <p class="mt-1 text-sm text-red-500">Must start with http:// or https://</p> }
+    </div>
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label class="label" for="image_file">Badge image (upload)</label>
+      <input id="image_file" class="field" type="file" accept="image/*" (change)="onFile($event)" />
+    </div>
+    <div>
+      <label class="label" for="image_url">or image URL</label>
+      <input id="image_url" class="field" type="url" formControlName="image_url" placeholder="https://" />
+    </div>
+  </div>
+
+  <div>
+    <label class="label" for="skills">Skills (comma separated)</label>
+    <textarea id="skills" class="field min-h-20" formControlName="skills" placeholder="HTML, CSS, JavaScript"></textarea>
+  </div>
+
+  <div class="max-w-xs">
+    <label class="label" for="sort_order">Order (smaller shows first)</label>
+    <input id="sort_order" class="field" type="number" formControlName="sort_order" />
+  </div>
+
+  @if (error(); as message) {
+    <p class="text-sm text-red-500" role="alert">{{ message }}</p>
+  }
+
+  <div class="flex gap-3">
+    <button type="submit" class="btn btn-primary" [disabled]="saving()">
+      @if (saving()) { <app-spinner size="sm" label="Saving" /> }
+      Save
+    </button>
+    <button type="button" class="btn btn-ghost" (click)="cancelled.emit()">Cancel</button>
+  </div>
+</form>

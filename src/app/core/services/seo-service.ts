@@ -45,7 +45,7 @@ export class SeoService {
       email: 'mailto:tarrekgoda@gmail.com',
       address: { '@type': 'PostalAddress', addressRegion: 'Fayoum', addressCountry: 'EG' },
       knowsAbout: ['Angular', 'TypeScript', 'Tailwind CSS', 'RxJS'],
-      sameAs: ['https://www.linkedin.com/in/tarek-goda'],
+      sameAs: ['https://www.linkedin.com/in/tarekgoda22/'],
     });
   }
 

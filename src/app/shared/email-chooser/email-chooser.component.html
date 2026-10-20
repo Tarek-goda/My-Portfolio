@@ -1,0 +1,27 @@
+@if (mail.chooser(); as draft) {
+  <div
+    class="fixed inset-0 z-[60] flex items-end justify-center bg-black/55 p-4 sm:items-center"
+    (click)="mail.closeChooser()"
+  >
+    <div
+      class="rise w-full max-w-sm rounded-2xl border border-line bg-surface p-5"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="email-chooser-title"
+      (click)="$event.stopPropagation()"
+    >
+      <h2 id="email-chooser-title" class="font-display text-lg font-bold">Send me an email</h2>
+      <p class="mt-1 break-all text-sm text-muted">{{ mail.address }}</p>
+
+      <div class="mt-5 grid gap-2">
+        <button type="button" class="btn btn-primary" (click)="mail.openGmailApp(draft)">Gmail app</button>
+        <button type="button" class="btn btn-ghost" (click)="mail.openMailApp(draft)">Mail app</button>
+        <button type="button" class="btn btn-ghost" (click)="mail.openGmailWeb(draft)">Gmail in browser</button>
+        <button type="button" class="btn btn-ghost" (click)="copy()">
+          {{ copied() ? 'Copied' : 'Copy address' }}
+        </button>
+        <button type="button" class="btn text-muted" (click)="mail.closeChooser()">Cancel</button>
+      </div>
+    </div>
+  </div>
+}

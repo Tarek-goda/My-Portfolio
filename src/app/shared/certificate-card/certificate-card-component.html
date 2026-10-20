@@ -1,0 +1,56 @@
+<article class="group relative flex gap-4 rounded-xl border border-line bg-surface p-4 transition-colors hover:border-accent sm:p-5">
+  @if (certificate().image_url; as image) {
+    <img
+      [src]="image"
+      [alt]="certificate().title + ' badge'"
+      loading="lazy"
+      class="size-20 shrink-0 rounded-lg object-cover sm:size-24"
+    />
+  } @else {
+    <div class="grid size-20 shrink-0 place-items-center rounded-lg border border-line text-accent sm:size-24" aria-hidden="true">
+      <svg class="size-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="9" r="6" />
+        <path d="m8.5 14.5-1.5 7 5-3 5 3-1.5-7" />
+      </svg>
+    </div>
+  }
+
+  <div class="min-w-0">
+    <h3 class="font-display text-lg font-bold leading-snug">
+      @if (certificate().credential_url; as url) {
+        <!-- after:inset-0 بيخلي الكارت كله قابل للضغط -->
+        <a
+          [href]="url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition-colors after:absolute after:inset-0 group-hover:text-accent"
+        >
+          {{ certificate().title }}
+        </a>
+      } @else {
+        {{ certificate().title }}
+      }
+    </h3>
+
+    <p class="mt-1 text-sm text-muted">
+      {{ certificate().issuer }}@if (certificate().issued_on) { · {{ certificate().issued_on | date: 'MMM yyyy' }} }
+    </p>
+
+    @if (visibleSkills().length) {
+      <ul class="mt-3 flex flex-wrap gap-1.5">
+        @for (skill of visibleSkills(); track skill) {
+          <li class="chip">{{ skill }}</li>
+        }
+        @if (extraSkills() > 0) {
+          <li class="chip">+{{ extraSkills() }}</li>
+        }
+      </ul>
+    }
+
+    @if (certificate().credential_url) {
+      <span class="mt-3 inline-block text-sm font-medium text-accent group-hover:underline">
+        View credential <span aria-hidden="true">↗</span>
+      </span>
+    }
+  </div>
+</article>

@@ -81,6 +81,24 @@
   </ol>
 </section>
 
+
+<!-- Certifications -->
+@if (certs.loading() || certs.certificates().length > 0) {
+  <section class="mx-auto max-w-6xl px-5 py-16" aria-labelledby="cert-title">
+    <h2 id="cert-title" class="font-display text-3xl font-extrabold sm:text-4xl">Certifications</h2>
+
+    @if (certs.loading() && certs.certificates().length === 0) {
+      <div class="flex justify-center py-14"><app-spinner label="Loading certificates" /></div>
+    } @else {
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        @for (certificate of certs.certificates(); track certificate.id) {
+          <app-certificate-card [certificate]="certificate" />
+        }
+      </div>
+    }
+  </section>
+}
+
 <!-- Skills -->
 <section class="mx-auto max-w-6xl px-5 py-16" aria-labelledby="skills-title">
   <h2 id="skills-title" class="font-display text-3xl font-extrabold sm:text-4xl">Skills</h2>

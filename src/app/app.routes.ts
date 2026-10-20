@@ -52,6 +52,14 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'certificates',
+        title: 'Manage Certificates',
+        loadComponent: () =>
+          import('./admin/certificates-manager/certificates-manager-component').then(
+            (m) => m.CertificatesManagerComponent,
+          ),
+      },
+      {
         path: 'resume',
         title: 'Manage CV',
         loadComponent: () =>

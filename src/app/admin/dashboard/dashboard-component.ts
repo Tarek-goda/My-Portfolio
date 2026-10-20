@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CertificatesService } from '../../core/services/certificates-service';
 import { ProjectsService } from '../../core/services/projects-service';
 import { ResumeService } from '../../core/services/resume-service';
 
@@ -11,10 +12,12 @@ import { ResumeService } from '../../core/services/resume-service';
 })
 export class DashboardComponent implements OnInit {
   protected readonly store = inject(ProjectsService);
+  protected readonly certs = inject(CertificatesService);
   protected readonly resume = inject(ResumeService);
 
   ngOnInit(): void {
     this.store.load();
+    this.certs.load();
     this.resume.load();
   }
 }

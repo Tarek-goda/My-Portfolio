@@ -1,0 +1,43 @@
+<div class="flex items-center justify-between gap-4">
+  <h1 class="font-display text-3xl font-extrabold">Certificates</h1>
+  <button type="button" class="btn btn-primary" (click)="editing.set('new')">New certificate</button>
+</div>
+
+@if (editing()) {
+  <div class="rise mt-8 rounded-xl border border-line bg-surface p-5 sm:p-6">
+    <h2 class="font-display text-xl font-bold">
+      {{ editing() === 'new' ? 'New certificate' : 'Edit certificate' }}
+    </h2>
+    <app-certificate-form
+      class="mt-5 block"
+      [certificate]="formCertificate()"
+      (saved)="editing.set(null)"
+      (cancelled)="editing.set(null)"
+    />
+  </div>
+}
+
+@if (error(); as message) {
+  <p class="mt-6 text-sm text-red-500" role="alert">{{ message }}</p>
+}
+
+<div class="mt-8 border-t border-line">
+  @if (store.loading() && store.certificates().length === 0) {
+    <div class="flex justify-center py-12"><app-spinner label="Loading certificates" /></div>
+  } @else {
+    @for (certificate of store.certificates(); track certificate.id) {
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-line py-4">
+        <div class="min-w-0">
+          <p class="truncate font-semibold">{{ certificate.title }}</p>
+          <p class="truncate text-sm text-muted">{{ certificate.issuer }}</p>
+        </div>
+        <div class="flex gap-2">
+          <button type="button" class="btn btn-ghost" (click)="editing.set(certificate)">Edit</button>
+          <button type="button" class="btn btn-danger" (click)="remove(certificate)">Delete</button>
+        </div>
+      </div>
+    } @empty {
+      <p class="py-10 text-muted">No certificates yet. Add your first one.</p>
+    }
+  }
+</div>

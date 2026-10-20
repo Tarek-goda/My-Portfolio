@@ -17,6 +17,7 @@ export class AdminLayoutComponent {
     { path: '/admin', label: 'Dashboard', exact: true },
     { path: '/admin/projects', label: 'Projects', exact: false },
     { path: '/admin/resume', label: 'CV', exact: false },
+    { path: '/admin/certificates', label: 'Certificates', exact: false },
   ];
 
   constructor() {
