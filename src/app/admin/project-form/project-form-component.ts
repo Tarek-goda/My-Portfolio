@@ -33,6 +33,7 @@ export class ProjectFormComponent {
     poster_url: ['', Validators.pattern(URL_PATTERN)],
     tags: [''],
     sort_order: [0],
+    in_progress: [false],
   });
 
   constructor() {
@@ -47,6 +48,7 @@ export class ProjectFormComponent {
         poster_url: p?.poster_url ?? '',
         tags: p?.tags.join(', ') ?? '',
         sort_order: p?.sort_order ?? 0,
+        in_progress: p?.in_progress ?? false,
       });
     });
   }
@@ -72,6 +74,7 @@ export class ProjectFormComponent {
       poster_url: v.poster_url.trim() || null,
       tags: v.tags.split(',').map((t) => t.trim()).filter(Boolean),
       sort_order: Number(v.sort_order) || 0,
+      in_progress: v.in_progress,
     };
 
     try {

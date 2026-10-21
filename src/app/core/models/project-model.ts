@@ -7,6 +7,7 @@ export interface Project {
   repo_url: string | null;
   tags: string[];
   sort_order: number;
+  in_progress: boolean;
   created_at: string;
 }
 
@@ -18,4 +19,5 @@ export interface ProjectInput {
   repo_url: string | null;
   tags: string[];
   sort_order: number;
+  in_progress: boolean;
 }

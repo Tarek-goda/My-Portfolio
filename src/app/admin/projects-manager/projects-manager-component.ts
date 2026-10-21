@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { Project } from '../../core/models/project-model';
 import { ProjectsService } from '../../core/services/projects-service';
+import { PresentBadgeComponent } from '../../shared/present-badge/present-badge-component';
 import { SpinnerComponent } from '../../shared/spinner/spinner-component';
 import { ProjectFormComponent } from '../project-form/project-form-component';
 
 @Component({
   selector: 'app-projects-manager',
-  imports: [ProjectFormComponent, SpinnerComponent],
+  imports: [ProjectFormComponent, SpinnerComponent, PresentBadgeComponent],
   templateUrl: './projects-manager-component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

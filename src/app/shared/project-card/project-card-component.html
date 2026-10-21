@@ -6,8 +6,13 @@
     [attr.aria-controls]="'panel-' + project().id"
     (click)="open.update((v) => !v)"
   >
-    <span class="font-display text-xl font-bold transition-colors group-hover:text-accent sm:text-2xl">
-      {{ project().title }}
+    <span class="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1.5">
+      <span class="font-display text-xl font-bold transition-colors group-hover:text-accent sm:text-2xl">
+        {{ project().title }}
+      </span>
+      @if (project().in_progress) {
+        <app-present-badge />
+      }
     </span>
     <span class="flex items-center gap-4">
       <span class="hidden flex-wrap justify-end gap-2 sm:flex">

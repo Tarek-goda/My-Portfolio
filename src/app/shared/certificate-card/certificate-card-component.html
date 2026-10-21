@@ -16,21 +16,26 @@
   }
 
   <div class="min-w-0">
-    <h3 class="font-display text-lg font-bold leading-snug">
-      @if (certificate().credential_url; as url) {
-        <!-- after:inset-0 بيخلي الكارت كله قابل للضغط -->
-        <a
-          [href]="url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="transition-colors after:absolute after:inset-0 group-hover:text-accent"
-        >
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+      <h3 class="font-display text-lg font-bold leading-snug">
+        @if (certificate().credential_url; as url) {
+          <!-- after:inset-0 بيخلي الكارت كله قابل للضغط -->
+          <a
+            [href]="url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transition-colors after:absolute after:inset-0 group-hover:text-accent"
+          >
+            {{ certificate().title }}
+          </a>
+        } @else {
           {{ certificate().title }}
-        </a>
-      } @else {
-        {{ certificate().title }}
+        }
+      </h3>
+      @if (certificate().in_progress) {
+        <app-present-badge />
       }
-    </h3>
+    </div>
 
     <p class="mt-1 text-sm text-muted">
       {{ certificate().issuer }}@if (certificate().issued_on) { · {{ certificate().issued_on | date: 'MMM yyyy' }} }

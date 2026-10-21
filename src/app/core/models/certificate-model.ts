@@ -7,6 +7,7 @@ export interface Certificate {
   image_url: string | null;
   skills: string[];
   sort_order: number;
+  in_progress: boolean;
   created_at: string;
 }
 
@@ -18,4 +19,5 @@ export interface CertificateInput {
   image_url: string | null;
   skills: string[];
   sort_order: number;
+  in_progress: boolean;
 }

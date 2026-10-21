@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { Certificate } from '../../core/models/certificate-model';
 import { CertificatesService } from '../../core/services/certificates-service';
+import { PresentBadgeComponent } from '../../shared/present-badge/present-badge-component';
 import { SpinnerComponent } from '../../shared/spinner/spinner-component';
 import { CertificateFormComponent } from '../certificate-form/certificate-form-component';
 
 @Component({
   selector: 'app-certificates-manager',
-  imports: [CertificateFormComponent, SpinnerComponent],
+  imports: [CertificateFormComponent, SpinnerComponent, PresentBadgeComponent],
   templateUrl: './certificates-manager-component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

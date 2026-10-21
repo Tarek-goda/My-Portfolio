@@ -28,7 +28,12 @@
     @for (project of store.projects(); track project.id) {
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-line py-4">
         <div class="min-w-0">
-          <p class="truncate font-semibold">{{ project.title }}</p>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <p class="truncate font-semibold">{{ project.title }}</p>
+            @if (project.in_progress) {
+              <app-present-badge />
+            }
+          </div>
           <p class="truncate text-sm text-muted">{{ project.tags.join(' · ') }}</p>
         </div>
         <div class="flex gap-2">

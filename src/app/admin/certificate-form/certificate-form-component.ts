@@ -33,6 +33,7 @@ export class CertificateFormComponent {
     image_url: ['', Validators.pattern(URL_PATTERN)],
     skills: [''],
     sort_order: [0],
+    in_progress: [false],
   });
 
   constructor() {
@@ -47,6 +48,7 @@ export class CertificateFormComponent {
         image_url: c?.image_url ?? '',
         skills: c?.skills.join(', ') ?? '',
         sort_order: c?.sort_order ?? 0,
+        in_progress: c?.in_progress ?? false,
       });
     });
   }
@@ -72,6 +74,7 @@ export class CertificateFormComponent {
       image_url: v.image_url.trim() || null,
       skills: v.skills.split(',').map((s) => s.trim()).filter(Boolean),
       sort_order: Number(v.sort_order) || 0,
+      in_progress: v.in_progress,
     };
 
     try {

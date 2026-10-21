@@ -49,6 +49,18 @@
     <input id="sort_order" class="field" type="number" formControlName="sort_order" />
   </div>
 
+  <label class="flex cursor-pointer items-start gap-3">
+    <input type="checkbox" role="switch" formControlName="in_progress" class="peer sr-only" />
+    <span
+      class="relative mt-0.5 h-6 w-11 shrink-0 rounded-full border border-line bg-bg transition-colors after:absolute after:left-0.5 after:top-0.5 after:size-[18px] after:rounded-full after:bg-muted after:transition-all peer-checked:border-accent peer-checked:bg-accent peer-checked:after:translate-x-5 peer-checked:after:bg-bg peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent"
+      aria-hidden="true"
+    ></span>
+    <span>
+      <span class="block text-sm font-medium">Present (still in progress)</span>
+      <span class="block text-sm text-muted">Shows a "Present" badge on the public site until you turn this off.</span>
+    </span>
+  </label>
+
   @if (error(); as message) {
     <p class="text-sm text-red-500" role="alert">{{ message }}</p>
   }
